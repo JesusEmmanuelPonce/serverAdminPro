@@ -6,6 +6,7 @@ const usuarios = require('./router/usuarios')
 
 const app = express()
 app.use(cors())
+app.use(express.json())
 
 connection()
 
