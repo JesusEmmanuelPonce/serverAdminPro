@@ -19,5 +19,12 @@ router.post('/',
         validarCampos
     ],
     usuarioController.crearUsuarios)
+router.put('/:id', 
+    [
+        check('nombre', 'El nombre es obligatorio').not().isEmpty(),
+        check('email', 'El email es obligatorio').isEmail(),
+        check('rol', 'El rol es obligatorio').not().isEmpty(),
+    ],
+    usuarioController.actualizarUsuario)
 
 module.exports = router
