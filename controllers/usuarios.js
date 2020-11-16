@@ -103,3 +103,33 @@ exports.actualizarUsuario = async(req, res) => {
         })
     }
 }
+
+// eliminar usuario
+exports.eliminiarUsuario = async(req, res) => {
+    try {
+     const id = req.params.id
+
+     const usuarioDB = await Usuario.findById( id )
+
+    if (!usuarioDB) {
+        return res.status(404).json({
+            ok: false, 
+            msg: 'No existe usuario con ese id'
+        })
+    }
+
+    await Usuario.findByIdAndDelete(id)
+
+    res.json({
+        ok: true,
+        msg: 'Usuario eliminado'
+    })
+
+    } catch (error) {
+        console.log(error)
+        res.status(5000).json({
+            ok: false,
+            msg: 'Error inesperado en el servidor'
+        })
+    }
+}

@@ -2,15 +2,17 @@ require('dotenv').config()
 const express = require("express")
 const cors = require('cors')
 const { connection } = require('./database')
-const usuarios = require('./router/usuarios')
 
 const app = express()
 app.use(cors())
 app.use(express.json())
 
+// Conexion
 connection()
 
-app.use('/api/usuarios', usuarios)
+// rutas
+app.use('/api/usuarios', require('./router/usuarios'))
+app.use('/api/login', require('./router/auth'))
 
 app.listen(process.env.PORT, () => {
     console.log(`Server ${process.env.PORT}`)
