@@ -1,5 +1,6 @@
 const Usuario = require('../models/usuario')
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const { generarJWT } = require('../helpers/jwt');
 
 // Mostrar usuarios
 exports.getUsuarios = async (req, res) => {
@@ -42,9 +43,13 @@ exports.crearUsuarios = async (req, res) => {
         // Guardar
         await usuario.save()
 
+        // token
+        const token = await generarJWT(usuario._id)
+
         res.json({
             ok: true,
-            usuario
+            usuario,
+            token
         })
 
     } catch (error) {
