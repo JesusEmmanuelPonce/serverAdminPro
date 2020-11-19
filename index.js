@@ -12,6 +12,7 @@ connection()
 
 // rutas
 app.use('/api/usuarios', require('./router/usuarios'))
+app.use('/api/hospitales', require('./router/hospitales'))
 app.use('/api/login', require('./router/auth'))
 
 app.listen(process.env.PORT, () => {
