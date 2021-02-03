@@ -13,7 +13,21 @@ const validarJWT = (req, res, next) => {
 
     try {
         const { id } = jwt.verify(token, process.env.JWT_SECRET)
-        console.log(id)
+        // console.log(id) 
+    } catch (error) {
+        return res.status(401).json({
+            ok: false,
+            msg: 'Token no valido'
+        })
+    }
+
+    try {
+        const payload = jwt.verify(token, process.env.JWT_SECRET)
+        
+        req.id = payload.id
+
+        console.log(req.id)
+
     } catch (error) {
         return res.status(401).json({
             ok: false,

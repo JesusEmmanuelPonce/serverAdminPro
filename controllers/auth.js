@@ -31,14 +31,28 @@ exports.login = async(req, res) => {
 
     res.json({
         ok: true,
+        email,
         msg: 'Succes',
         token
     })
     } catch (error) {
         console.log(error)
-        res.status(500).json({
+        res.status(401).json({
             ok: false,
             msg: 'Error inesperado'
         })
     }
+}
+
+exports.revalidate = async(req, res) => {
+
+    const id = req.id;
+
+    const token = await generarJWT(id)
+
+    res.json({
+        ok: true,
+        id,
+        token
+    })
 }
